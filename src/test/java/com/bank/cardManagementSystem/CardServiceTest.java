@@ -1,12 +1,15 @@
 package com.bank.cardManagementSystem;
 
 import com.bank.cardManagementSystem.dto.*;
+import com.bank.cardManagementSystem.dto.request.ChangeCardStatusRequestDto;
+import com.bank.cardManagementSystem.dto.request.TransferRequestDto;
+import com.bank.cardManagementSystem.dto.response.CardResponseDto;
 import com.bank.cardManagementSystem.entity.Card;
-import com.bank.cardManagementSystem.entity.CardStatus;
+import com.bank.cardManagementSystem.entity.enums.CardStatus;
 import com.bank.cardManagementSystem.entity.User;
 import com.bank.cardManagementSystem.repository.CardRepository;
 import com.bank.cardManagementSystem.repository.UserRepository;
-import com.bank.cardManagementSystem.service.CardService;
+import com.bank.cardManagementSystem.service.impl.CardServiceImpl;
 import com.bank.cardManagementSystem.utils.CardNumberEncryptorUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +27,7 @@ import static org.mockito.Mockito.*;
 class CardServiceTest {
 
     @InjectMocks
-    private CardService cardService;
+    private CardServiceImpl cardService;
 
     @Mock
     private CardRepository cardRepository;

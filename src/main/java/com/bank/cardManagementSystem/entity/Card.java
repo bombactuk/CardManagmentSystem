@@ -1,19 +1,18 @@
 package com.bank.cardManagementSystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.bank.cardManagementSystem.entity.enums.CardStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Data
+@EqualsAndHashCode
 @Table(name = "cards")
 public class Card {
 
@@ -27,7 +26,6 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private User user;
 
     @Column(name = "expiration_date", nullable = false)
@@ -40,16 +38,52 @@ public class Card {
     @Column(name = "balance", nullable = false)
     private BigDecimal balance = BigDecimal.ZERO;
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Card card = (Card) o;
-        return Objects.equals(id, card.id) && Objects.equals(cardNumberEncrypted, card.cardNumberEncrypted) && Objects.equals(user, card.user) && Objects.equals(expirationDate, card.expirationDate) && status == card.status && Objects.equals(balance, card.balance);
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, cardNumberEncrypted, user, expirationDate, status, balance);
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCardNumberEncrypted() {
+        return cardNumberEncrypted;
+    }
+
+    public void setCardNumberEncrypted(String cardNumberEncrypted) {
+        this.cardNumberEncrypted = cardNumberEncrypted;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
 }

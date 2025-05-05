@@ -1,6 +1,6 @@
 package com.bank.cardManagementSystem.dto;
 
-import com.bank.cardManagementSystem.entity.CardStatus;
+import com.bank.cardManagementSystem.entity.enums.CardStatus;
 import lombok.Builder;
 import lombok.Data;
 

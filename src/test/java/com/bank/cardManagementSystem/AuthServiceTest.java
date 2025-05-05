@@ -1,10 +1,10 @@
 package com.bank.cardManagementSystem;
 
-import com.bank.cardManagementSystem.dto.JwtRequestDto;
-import com.bank.cardManagementSystem.dto.JwtResponseDto;
-import com.bank.cardManagementSystem.exception.AppError;
-import com.bank.cardManagementSystem.service.AuthService;
-import com.bank.cardManagementSystem.service.UserService;
+import com.bank.cardManagementSystem.dto.request.JwtRequestDto;
+import com.bank.cardManagementSystem.dto.response.JwtResponseDto;
+import com.bank.cardManagementSystem.exception.AuthException;
+import com.bank.cardManagementSystem.service.impl.AuthServiceImpl;
+import com.bank.cardManagementSystem.service.impl.UserServiceImpl;
 import com.bank.cardManagementSystem.utils.JwtTokenUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class AuthServiceTest {
 
     @Mock
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Mock
     private JwtTokenUtils jwtTokenUtils;
@@ -36,7 +36,7 @@ class AuthServiceTest {
     private AuthenticationManager authenticationManager;
 
     @InjectMocks
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Test
     void createAuthToken_Success() {
@@ -70,7 +70,7 @@ class AuthServiceTest {
         ResponseEntity<?> response = authService.createAuthToken(request);
 
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-        assertTrue(response.getBody() instanceof AppError);
-        assertEquals("Incorrect login or password", ((AppError) response.getBody()).getMessage());
+        assertTrue(response.getBody() instanceof AuthException);
+        assertEquals("Incorrect login or password", ((AuthException) response.getBody()).getMessage());
     }
 }

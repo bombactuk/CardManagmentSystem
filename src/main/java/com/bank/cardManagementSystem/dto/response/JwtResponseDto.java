@@ -1,4 +1,4 @@
-package com.bank.cardManagementSystem.dto;
+package com.bank.cardManagementSystem.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -6,8 +6,6 @@ info:
 servers:
   - url: http://localhost:8080
     description: Локальный сервер
-  - url: https://api.bank.com/v1
-    description: Продакшен сервер
 
 tags:
   - name: Authentication
@@ -172,10 +170,6 @@ paths:
                     example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
         401:
           description: Неверные учетные данные
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /registration:
     post:
@@ -196,10 +190,6 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         400:
           description: Ошибка валидации
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /admin/create/cards:
     post:
@@ -222,10 +212,6 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         403:
           description: Доступ запрещен
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /admin/card/info:
     post:
@@ -261,10 +247,6 @@ paths:
                     type: number
         404:
           description: Карта не найдена
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /admin/change-status:
     post:
@@ -287,10 +269,6 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         400:
           description: Неверный запрос
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /admin/card/delete/{cardId}:
     delete:
@@ -313,10 +291,6 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         404:
           description: Карта не найдена
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /user/cards/{cardNumber}/balance:
     get:
@@ -344,10 +318,6 @@ paths:
                     type: number
         403:
           description: Доступ запрещен
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /user/cards:
     get:
@@ -397,10 +367,6 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         400:
           description: Ошибка блокировки
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 
   /user/cards/transfer:
     post:
@@ -423,7 +389,3 @@ paths:
                 $ref: "#/components/schemas/SuccessResponse"
         400:
           description: Ошибка перевода
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"

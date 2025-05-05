@@ -1,7 +1,6 @@
 package com.bank.cardManagementSystem.repository;
 
 import com.bank.cardManagementSystem.entity.Card;
-import com.bank.cardManagementSystem.entity.CardStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +14,6 @@ public interface CardRepository extends JpaRepository<Card, Long> {
 
     Optional<Card> findByCardNumberEncrypted(String cardNumberEncrypted);
 
-    List<Card> findAllByStatus(CardStatus status);
-
     List<Card> findAllByUserUsername(String username);
+
 }

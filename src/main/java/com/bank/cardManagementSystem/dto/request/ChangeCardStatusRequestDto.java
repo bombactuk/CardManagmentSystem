@@ -1,6 +1,6 @@
-package com.bank.cardManagementSystem.dto;
+package com.bank.cardManagementSystem.dto.request;
 
-import com.bank.cardManagementSystem.entity.CardStatus;
+import com.bank.cardManagementSystem.entity.enums.CardStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

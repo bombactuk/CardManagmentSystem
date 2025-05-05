@@ -1,4 +1,4 @@
-package com.bank.cardManagementSystem.entity;
+package com.bank.cardManagementSystem.entity.enums;
 
 public enum CardStatus {
 
