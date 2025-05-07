@@ -4,6 +4,7 @@ import com.bank.cardManagementSystem.exception.AuthException;
 import com.bank.cardManagementSystem.exception.CardException;
 import com.bank.cardManagementSystem.exception.ExceptionResponse;
 import com.bank.cardManagementSystem.exception.enums.ErrorCode;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,8 +26,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        String errorMessage = ex.getBindingResult().getAllErrors().stream()
+                .findFirst()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .orElse("Validation failed");
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(exceptionBuilder(ErrorCode.BAD_REQUEST, ex.getMessage()));
+                .body(exceptionBuilder(ErrorCode.BAD_REQUEST, errorMessage));
     }
 
     @ExceptionHandler(AuthException.class)

@@ -76,7 +76,7 @@ Content-Type: application/json
 
 2. Чтобы зайти под админа ADMIN
 
-POST /auth
+POST /api/v1/clients/auth
 Content-Type: application/json
 
 {
@@ -88,7 +88,5 @@ Content-Type: application/json
 
 Чтобы просмотреть все доступные методы API:
 
-1. Перейдите на сайт [Swagger Editor](https://editor.swagger.io).
-2. Загрузите файл `openapi.yaml` (можно перетащить файл в окно редактора или использовать пункт **File → Import File**).
-3. После загрузки вы сможете просмотреть документацию и протестировать доступные методы API.
-4. Или использовать внутренний инструмент ide.
+1. Запустите приложение
+2. И перейдите на http://localhost:8080/swagger-ui/index.html

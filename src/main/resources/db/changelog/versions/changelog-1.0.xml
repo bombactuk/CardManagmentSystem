@@ -1,0 +1,170 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cards"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cards">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="cards_pkey"/>
+            </column>
+            <column name="balance" type="numeric(38, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="card_number_encrypted" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists primaryKeyName="uk146hc44fkix9bwe14vhldomf3"/>
+            </not>
+        </preConditions>
+        <addUniqueConstraint columnNames="card_number_encrypted" constraintName="uk146hc44fkix9bwe14vhldomf3" tableName="cards"/>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="roles_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users_roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk2o0jvgh89lemvvo17cbqvdxaa"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_roles"
+                                 constraintName="fk2o0jvgh89lemvvo17cbqvdxaa" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users"
+                                 referencedTableSchemaName="banksystem" validate="true"/>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-7">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fkcmanafgwbibfijy2o5isfk3d5"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="cards"
+                                 constraintName="fkcmanafgwbibfijy2o5isfk3d5" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users"
+                                 referencedTableSchemaName="banksystem" validate="true"/>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-8">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fkj6m8fwv7oqv74fcehir1a9ffy"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users_roles"
+                                 constraintName="fkj6m8fwv7oqv74fcehir1a9ffy" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="roles"
+                                 referencedTableSchemaName="banksystem" validate="true"/>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-9">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM roles WHERE id = 1
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="roles">
+            <column name="id" value="1"/>
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="bombactuk (generated)" id="1746385478881-10">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM roles WHERE id = 2
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="roles">
+            <column name="id" value="2"/>
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="custom" id="create-admin-user" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM users WHERE username = 'admin'
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$090htRZ37gNMerDqBl0/T.2y9m0/FLYOOoxLQItL3e4o/j4x0ukPa"/>
+            <column name="email" value="admin@example.com"/>
+        </insert>
+        <sql>
+            INSERT INTO users_roles (user_id, role_id)
+            VALUES ((SELECT id FROM users WHERE username = 'admin'), 2);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
