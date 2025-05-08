@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS banksystem;
+GRANT ALL PRIVILEGES ON SCHEMA banksystem TO postgres;
